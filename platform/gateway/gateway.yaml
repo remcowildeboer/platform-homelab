@@ -1,0 +1,29 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: homelab-gateway
+  namespace: default
+spec:
+  gatewayClassName: eg
+
+  listeners:
+    - name: http
+      port: 80
+      protocol: HTTP
+      allowedRoutes:
+        namespaces:
+          from: All
+
+    - name: https
+      hostname: argocd.homelab
+      port: 443
+      protocol: HTTPS
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - group: ""
+            kind: Secret
+            name: argocd-homelab-tls
+      allowedRoutes:
+        namespaces:
+          from: All
