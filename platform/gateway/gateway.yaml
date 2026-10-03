@@ -27,3 +27,18 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
+
+    - name: grafana-https
+      hostname: grafana.homelab
+      port: 443
+      protocol: HTTPS
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - group: ""
+            kind: Secret
+            name: grafana-homelab-tls
+      allowedRoutes:
+        namespaces:
+          from: All
+  
