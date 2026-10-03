@@ -22,6 +22,14 @@ spec:
     server: https://kubernetes.default.svc
     namespace: monitoring
 
+  ignoreDifferences:
+    - group: ""
+      kind: Secret
+      name: observability-grafana
+      namespace: monitoring
+      jsonPointers:
+        - /data/admin-password
+  
   syncPolicy:
     automated:
       enabled: true
@@ -31,3 +39,4 @@ spec:
       - CreateNamespace=true
       - SkipDryRunOnMissingResource=true
       - ServerSideApply=true
+
