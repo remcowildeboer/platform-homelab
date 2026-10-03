@@ -29,7 +29,13 @@ spec:
       namespace: monitoring
       jsonPointers:
         - /data/admin-password
-  
+    - group: apps
+      kind: Deployment
+      name: observability-grafana
+      namespace: monitoring
+      jqPathExpressions:
+        - '.spec.template.metadata.annotations."checksum/secret"'  
+
   syncPolicy:
     automated:
       enabled: true
